@@ -28,17 +28,30 @@ class Scanner:
     def findJPG(self, extract = False):
         self.readFile() # Reading the file content in
         start = self.content.find(b'\xff\xd8\xff') # Looking for the generic JPG Header
-        if a > 0: # If Successful
+        if start > 0: # If Successful
             end = self.content.find(b'\xff\xd9', start) # Looking for the trailer
-            print("Start: " + str(start))
-            print("End: " + str(end))
+            print("JPG Found")
+            #print("Start: " + str(start))
+            #print("End: " + str(end))
             if extract == True: # Optional to extract the images
                 print("Extracting JPG")
-                self.extractJPG(start, end) # Extracts the image based on pos in the blob
+                self.extractFile(start, end, '.jpg') # Extracts the image based on pos in the blob
     
-    # Extracts JPG's
+    def findPNG(self, extract = False):
+        self.readFile() # Reading the file content in
+        start = self.content.find(b'\x89\x50\x4E\x47\x0D\x0A\x1A\x0A') # Looking for the generic PNG Header
+        if start > 0: # If Successful
+            end = self.content.find(b'\x49\x45\x4E\x44\xAE\x42\x60\x82', start) # Looking for the trailer
+            print("PNG Found")
+            #print("Start: " + str(start))
+            #print("End: " + str(end))
+            if extract == True: # Optional to extract the images
+                print("Extracting PNG")
+                self.extractFile(start, end, '.png') # Extracts the image based on pos in the blob
+
+    # Extracts Files
     # Could be cleaner
-    def extractJPG(self, start, end):
+    def extractFile(self, start, end, trailer):
          img = self.content[start:end] # Gets the file content
          h = hashlib.sha256() 
          h.update(img) # Hashes the image content
@@ -46,7 +59,7 @@ class Scanner:
          directory = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d') # Folder with datestamp
          if not os.path.exists(directory):
             os.makedirs(directory)
-         fname = directory + '/' + h.hexdigest() + '.jpg' # Store using the hash
+         fname = directory + '/' + h.hexdigest() + trailer # Store using the hash
          with open(fname, 'wb') as f: # Writing bytes
              f.write(img)
 
@@ -55,3 +68,4 @@ if __name__ == "__main__":
         print("Starting\n")
         scanner = Scanner(sys.argv[1])
         scanner.findJPG(True)
+        scanner.findPNG(True)
