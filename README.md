@@ -10,5 +10,5 @@ Requirements:
   Python3
   
 ```bash
-python3 scanner.py fileblob
+python3 ShittyScanner.py fileblob
 ```
