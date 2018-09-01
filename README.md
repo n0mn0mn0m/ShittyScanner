@@ -2,6 +2,8 @@
 
 A little scanner to pull out files with specific signatures
 
+** Only works on JPG's currently **
+
 Requirements:
   Python3
   
