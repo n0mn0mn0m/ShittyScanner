@@ -1,4 +1,3 @@
-```python
 Signatures = List
 	Name : Header : Trailer
     e.g. JPG : FF D8 FF : FF D9
@@ -26,6 +25,3 @@ Function ExtractFile(Start, End, Extension)
     Hash(FileContent)
     Mkdir(DateStamp)
     WriteFile(DateStamp + Hash + Extension)
-
-```
-
