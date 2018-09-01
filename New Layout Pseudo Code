@@ -1,0 +1,31 @@
+```python
+Signatures = List
+	Name : Header : Trailer
+    e.g. JPG : FF D8 FF : FF D9
+
+Enter File Name
+
+Init Scannner
+	Read File Contents,
+    Store in self.content
+   
+Scanner.Scan(True)
+
+Function Scanner(Extract = False)
+	For Signature in Signatures:
+        While True:
+            Start = self.content.find(Signature.Header)
+            if Start > 0:
+                End = self.content.find(Signature.Trailer)
+                self.ExtractFile(Start, End, Signature.Name)
+            else:
+            	Break
+
+Function ExtractFile(Start, End, Extension)
+	FileContent = self.content[Start:End]
+    Hash(FileContent)
+    Mkdir(DateStamp)
+    WriteFile(DateStamp + Hash + Extension)
+
+```
+
