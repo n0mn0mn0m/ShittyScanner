@@ -16,7 +16,6 @@ class Scanner:
             {'type' : '0', 'name' : 'PNG', 'header' : b'\x89\x50\x4E\x47\x0D\x0A\x1A\x0A', 'trailer' : b'\x49\x45\x4E\x44\xAE\x42\x60\x82', 'extension' : '.png'},
             {'type' : '0', 'name' : 'MPEG2', 'header' : b'\x00\x00\x01\xBA', 'trailer' : '\x00\x00\x01\xB9', 'extension' : '.mpg'},
             {'type' : '0', 'name' : 'MPEG', 'header' : b'\x00\x00\x01', 'trailer' : '\x00\x00\x01\xB7', 'extension' : '.mpg'}
-
         ]
     
     def readFile(self, fileName):
